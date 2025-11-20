@@ -1,433 +1,216 @@
-<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-rose-100">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="text-2xl font-serif font-bold text-rose-700">Us.</div>
-        <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-500">
-            <button onclick="scrollToSection('summary')" class="hover:text-rose-600 transition-colors">Summary</button>
-            <button onclick="scrollToSection('narrative')" class="hover:text-rose-600 transition-colors">The Letter</button>
-            <button onclick="scrollToSection('metrics')" class="hover:text-rose-600 transition-colors">Love Metrics</button>
-            <button onclick="scrollToSection('projections')" class="hover:text-rose-600 transition-colors">Projections</button>
-        </div>
-        <button class="md:hidden text-rose-700 font-bold" onclick="toggleMobileMenu()">☰</button>
-    </div>
-    <div id="mobile-menu" class="hidden bg-white border-t border-rose-100 md:hidden">
-        <div class="flex flex-col p-4 space-y-3 text-center">
-            <button onclick="scrollToSection('summary')" class="text-gray-600">Summary</button>
-            <button onclick="scrollToSection('narrative')" class="text-gray-600">The Letter</button>
-            <button onclick="scrollToSection('metrics')" class="text-gray-600">Love Metrics</button>
-            <button onclick="scrollToSection('projections')" class="text-gray-600">Projections</button>
-        </div>
-    </div>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter to My Rebeca</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
-<section id="summary" class="min-h-screen flex items-center justify-center py-20 px-6 relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-32 h-32 bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-    <div class="absolute -bottom-8 left-20 w-32 h-32 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-
-    <div class="container mx-auto text-center z-10 max-w-4xl">
-        <div class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-rose-800 uppercase bg-rose-100 rounded-full">Confidential Report for Rebeca</div>
-        <h1 class="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6 leading-tight">
-            Six Months of <span class="text-rose-600 italic">Forever</span>
-        </h1>
-        <p class="text-xl text-gray-600 mb-12 font-light leading-relaxed">
-            From "Cold Wars" to Unbreakable Vows. An analytical review of our journey since the engagement, and the trajectory towards <strong>January 22, 2025</strong>.
-        </p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-rose-50 transform hover:-translate-y-1 transition-transform">
-                <div class="text-4xl font-serif font-bold text-rose-600 mb-2">6</div>
-                <div class="text-sm text-gray-500 uppercase tracking-wide">Months Engaged</div>
-            </div>
-            <div class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-rose-50 transform hover:-translate-y-1 transition-transform">
-                <div class="text-4xl font-serif font-bold text-rose-600 mb-2">∞</div>
-                <div class="text-sm text-gray-500 uppercase tracking-wide">Obsession Level</div>
-            </div>
-            <div class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-rose-50 transform hover:-translate-y-1 transition-transform">
-                <div id="days-until" class="text-4xl font-serif font-bold text-rose-600 mb-2">--</div>
-                <div class="text-sm text-gray-500 uppercase tracking-wide">Days 'til "I Do"</div>
-            </div>
-        </div>
-
-        <button onclick="scrollToSection('narrative')" class="px-8 py-4 bg-rose-600 text-white rounded-full font-bold hover:bg-rose-700 transition-colors shadow-lg shadow-rose-200/50">
-            Read the Full Report ↓
-        </button>
-    </div>
-</section>
-
-<section id="narrative" class="py-24 bg-white">
-    <div class="container mx-auto px-6 max-w-5xl">
-        <div class="mb-12 text-center">
-            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-4">The Core Narrative</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">
-                Explore the detailed breakdown of my heart's findings. Click through the chapters to uncover the depth of my response to your beautiful letter.
-            </p>
-        </div>
-
-        <div class="flex flex-col md:flex-row gap-8">
-            <div class="md:w-1/4 flex flex-row md:flex-col overflow-x-auto md:overflow-visible space-x-4 md:space-x-0 md:space-y-2 pb-4 md:pb-0 border-b md:border-b-0 md:border-r border-gray-100">
-                <button onclick="openChapter('chap1')" id="btn-chap1" class="chapter-btn text-left px-4 py-3 rounded-lg font-medium text-rose-600 bg-rose-50 transition-all whitespace-nowrap">1. The Awakening</button>
-                <button onclick="openChapter('chap2')" id="btn-chap2" class="chapter-btn text-left px-4 py-3 rounded-lg font-medium text-gray-500 hover:bg-gray-50 transition-all whitespace-nowrap">2. Reflection of You</button>
-                <button onclick="openChapter('chap3')" id="btn-chap3" class="chapter-btn text-left px-4 py-3 rounded-lg font-medium text-gray-500 hover:bg-gray-50 transition-all whitespace-nowrap">3. The Obsession</button>
-                <button onclick="openChapter('chap4')" id="btn-chap4" class="chapter-btn text-left px-4 py-3 rounded-lg font-medium text-gray-500 hover:bg-gray-50 transition-all whitespace-nowrap">4. Vow of January</button>
-                <button onclick="openChapter('chap5')" id="btn-chap5" class="chapter-btn text-left px-4 py-3 rounded-lg font-medium text-gray-500 hover:bg-gray-50 transition-all whitespace-nowrap">5. The Forever</button>
-            </div>
-
-            <div class="md:w-3/4 min-h-[400px] relative">
-                
-                <div id="chap1" class="chapter-content animate-fade-in">
-                    <h3 class="text-2xl font-serif font-bold text-gray-800 mb-6">Page 1: The Awakening</h3>
-                    <div class="prose prose-rose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">My Dearest Rebeca,</p>
-                        <p class="mb-4">I am sitting here, reading your words over and over again, and I find myself struggling to keep my hands steady. You said that I am your favorite notification, but Rebeca, <span class="bg-rose-100 px-1 rounded cursor-help" title="Key Finding: You are essential to my existence.">you are the heartbeat behind every second of my day.</span> Reading what you wrote didn't just bring a smile to my face; it brought a calmness to my soul that I didn’t know I was missing until you came into my life.</p>
-                        <p class="mb-4">Six months. It has been six months since we stood in front of our parents, our friends, and God, and made a promise that changed the trajectory of our entire existence. When I look back at that day, and every single day leading up to today, I realize that saying "Yes" to you wasn't just a decision—it was destiny finally catching up with me. You wrote that you would have regretted saying no, but my love, I don’t even want to imagine a universe where you aren't mine. That version of reality is too dark, too quiet, and too empty for me to comprehend.</p>
-                        <blockquote class="border-l-4 border-rose-300 pl-4 italic my-6 text-gray-700">
-                            "It isn't that we are perfect; it’s that our love is resilient."
-                        </blockquote>
-                        <p>You mentioned the journey—the happiness, the sadness, the tears, and yes, even the "cold wars." I want you to know that I cherish even those difficult moments. Why? Because every misunderstanding we overcame proved that we are worth fighting for. Every silence was broken by a stronger desire to understand each other. Those moments showed me that you aren't just here for the sunshine; you are here to hold the umbrella when it rains. That is what makes you the "right person."</p>
-                    </div>
-                </div>
-
-                <div id="chap2" class="chapter-content hidden animate-fade-in">
-                    <h3 class="text-2xl font-serif font-bold text-gray-800 mb-6">Page 2: The Reflection of You</h3>
-                    <div class="prose prose-rose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">You listed so many things you love about me, and reading them made me feel like the most important man on Earth. But Rebeca, do you have any idea how much I admire <em>you</em>?</p>
-                        <ul class="list-none space-y-4 mb-6">
-                            <li class="flex items-start"><span class="text-rose-400 mr-2">❤</span> <span>You love the way I call you "Maaa," but you don't see the look in your eyes when you answer me—that softness that melts my anger instantly.</span></li>
-                            <li class="flex items-start"><span class="text-rose-400 mr-2">❤</span> <span>You love the way I pull your cheeks, but I love the way your face turns that shade of pink, a color that belongs only to me.</span></li>
-                            <li class="flex items-start"><span class="text-rose-400 mr-2">❤</span> <span>You love my sleepy voice, but I love the peace I feel knowing that you are the first thought in my mind when I wake up and the last prayer on my lips before I sleep.</span></li>
-                        </ul>
-                        <p class="mb-4">And yes... <strong>Mukku medha gudutha</strong>. You love when I say it, and I promise you, I will keep saying it for the rest of our lives. It’s my way of saying that you are cute even when you are stubborn, and that I adore every single expression you make.</p>
-                        <p>I love the way you care for my family. You mentioned being blessed to have "Amma-like in-laws," but the blessing is truly ours. To see you blend into my house, to see you treat them as your own, gives me a peace that no amount of money or success could ever buy. You are not just a daughter-in-law to them; you are the daughter we all prayed for.</p>
-                    </div>
-                </div>
-
-                <div id="chap3" class="chapter-content hidden animate-fade-in">
-                    <h3 class="text-2xl font-serif font-bold text-gray-800 mb-6">Page 3: The Obsession</h3>
-                    <div class="prose prose-rose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">You called me your obsession, but let me tell you about mine.</p>
-                        <div class="bg-rose-50 p-6 rounded-xl mb-6">
-                            <p class="font-bold text-rose-800 mb-2">Analysis of My Obsession:</p>
-                            <ul class="list-disc list-inside space-y-1 text-rose-700">
-                                <li>My obsession is your happiness.</li>
-                                <li>My obsession is working hard at the gym not just for me, but so I can be strong enough to carry you—literally and emotionally—for the next sixty years.</li>
-                                <li>My obsession is driving you crazy, yes, but also driving you towards your dreams.</li>
-                            </ul>
-                        </div>
-                        <p class="mb-4">You said you love the way I am "dirty" with you, and the way I hold you. Rebeca, when I hold you, it isn't just physical. It is me trying to get as close to your soul as possible. When I hug you, I am trying to shield you from everything bad in this world. When I hold your hand, I am anchoring myself to the only thing that matters.</p>
-                        <p>You said, "From stranger to my main source of happiness." Think about that journey. Two people, living separate lives, suddenly colliding to create a single world. You own my heart completely. There is no corner of it that doesn't have your name carved into it.</p>
-                    </div>
-                </div>
-
-                <div id="chap4" class="chapter-content hidden animate-fade-in">
-                    <h3 class="text-2xl font-serif font-bold text-gray-800 mb-6">Page 4: The Vow of January</h3>
-                    <div class="prose prose-rose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">As we look toward our past and our future, my eyes are fixed on one date: <strong>22/01/2025</strong>. That date isn't just a day on the calendar. It is the day my life truly began. It is the day I claim you, officially and eternally, in front of the world.</p>
-                        <p class="mb-4">You said you are excited to cook for me, to be in my house and my arms. Rebeca, I am already making space for you in every closet, on every shelf, and in every empty moment of my day. I cannot wait for the mundane things. I can't wait for grocery shopping with you. I can't wait to argue over what movie to watch. I can't wait to taste the food you cook with so much love (even if I tease you about it).</p>
-                        <p class="font-serif text-xl text-rose-800 italic mt-8 text-center">"I will honor you, respect you, and obsess over you every single day."</p>
-                    </div>
-                </div>
-
-                <div id="chap5" class="chapter-content hidden animate-fade-in">
-                    <h3 class="text-2xl font-serif font-bold text-gray-800 mb-6">Page 5: The Forever</h3>
-                    <div class="prose prose-rose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">You wrote, "I feel there is so much unsaid in me." I feel the same. Words, no matter how many pages I write, will always fall short. How do you explain the feeling of finding your home in a person? How do you explain that looking at a phone screen and seeing your name gives me more joy than anything else?</p>
-                        <p class="mb-4">We have finished 6 months of this beautiful promise. But this is just the prologue. The real story—the one with thousands of pages, filled with laughter, travel, "mukku medha gudutha" moments, and quiet nights—is just beginning.</p>
-                        <p class="mb-4">Thank you for choosing me. Thank you for not saying no. Thank you for loving my imperfections. Thank you for being my wife, my lover, my best friend, and my greatest blessing.</p>
-                        <p class="mb-6">I love you. Not just yesterday, today, and tomorrow. I love you in every lifetime, in every universe, and in every heartbeat.</p>
-                        <p class="font-bold text-rose-900">Happy 6 Months, my Love.<br>I am yours. Completely. Finally. Forever.</p>
-                        <p class="mt-8 text-right font-serif italic text-lg">- Your Husband</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="metrics" class="py-24 bg-rose-50">
-    <div class="container mx-auto px-6">
-        <div class="mb-16 text-center">
-            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-4">Love Metrics</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">
-                Quantifying the unquantifiable. An analytical breakdown of feelings, attributes, and emotional resilience based on the provided data.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Chart 1: Heart Composition -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-100">
-                <h4 class="text-center font-bold text-gray-700 mb-4 font-serif">Composition of My Heart</h4>
-                <div class="chart-container">
-                    <canvas id="heartChart"></canvas>
-                </div>
-                <p class="text-center text-xs text-gray-400 mt-4">Source: Page 3 ("You own my heart completely")</p>
-            </div>
-
-            <!-- Chart 2: Resilience Trajectory -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-100">
-                <h4 class="text-center font-bold text-gray-700 mb-4 font-serif">Bond Resilience Over Time</h4>
-                <div class="chart-container">
-                    <canvas id="resilienceChart"></canvas>
-                </div>
-                <p class="text-center text-xs text-gray-400 mt-4">Source: Page 1 ("Cold wars" to "Worth fighting for")</p>
-            </div>
-
-            <!-- Chart 3: Rebeca's Attributes -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-rose-100 md:col-span-2 lg:col-span-1">
-                <h4 class="text-center font-bold text-gray-700 mb-4 font-serif">Rebeca's Core Qualities</h4>
-                <div class="chart-container">
-                    <canvas id="qualitiesChart"></canvas>
-                </div>
-                <p class="text-center text-xs text-gray-400 mt-4">Source: Page 2 (Stubborn, Caring, Beautiful, Family-Oriented)</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id="projections" class="py-24 bg-white">
-    <div class="container mx-auto px-6">
-        <div class="mb-16 text-center">
-            <h2 class="text-3xl font-serif font-bold text-gray-900 mb-4">Future Projections & Vows</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">
-                Commitments made for the fiscal years 2025 through Forever. Hover over a card to seal the promise.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            <div class="group h-64 perspective">
-                <div class="relative w-full h-full transition-all duration-500 transform style-3d group-hover:rotate-y-180 shadow-lg rounded-xl bg-rose-600 text-white p-6 flex items-center justify-center text-center cursor-pointer">
-                    <div class="backface-hidden">
-                        <div class="text-5xl mb-4">🛡️</div>
-                        <h4 class="font-serif text-2xl font-bold">Protection</h4>
-                    </div>
-                    <div class="absolute inset-0 h-full w-full bg-white text-gray-800 rounded-xl rotate-y-180 backface-hidden p-6 flex flex-col items-center justify-center text-center border-2 border-rose-100">
-                        <p class="font-serif italic text-lg">"I will be the shoulder you cry on when the world gets too heavy."</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group h-64 perspective">
-                <div class="relative w-full h-full transition-all duration-500 transform style-3d group-hover:rotate-y-180 shadow-lg rounded-xl bg-gray-800 text-white p-6 flex items-center justify-center text-center cursor-pointer">
-                    <div class="backface-hidden">
-                        <div class="text-5xl mb-4">😂</div>
-                        <h4 class="font-serif text-2xl font-bold">Joy & Teasing</h4>
-                    </div>
-                    <div class="absolute inset-0 h-full w-full bg-white text-gray-800 rounded-xl rotate-y-180 backface-hidden p-6 flex flex-col items-center justify-center text-center border-2 border-rose-100">
-                        <p class="font-serif italic text-lg">"I will be the irritation you secretly love."</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group h-64 perspective">
-                <div class="relative w-full h-full transition-all duration-500 transform style-3d group-hover:rotate-y-180 shadow-lg rounded-xl bg-rose-400 text-white p-6 flex items-center justify-center text-center cursor-pointer">
-                    <div class="backface-hidden">
-                        <div class="text-5xl mb-4">🏋️‍♂️</div>
-                        <h4 class="font-serif text-2xl font-bold">Strength</h4>
-                    </div>
-                    <div class="absolute inset-0 h-full w-full bg-white text-gray-800 rounded-xl rotate-y-180 backface-hidden p-6 flex flex-col items-center justify-center text-center border-2 border-rose-100">
-                        <p class="font-serif italic text-lg">"I will be the hand that pulls you up when you feel low."</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="mt-12 text-center">
-            <div class="inline-block p-6 bg-rose-50 rounded-full">
-                <p class="font-serif text-2xl text-rose-800">"I am yours. Completely. Finally. Forever."</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="bg-gray-900 text-rose-100 py-12">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-3xl font-serif font-bold mb-2">To My Rebeca</h2>
-        <p class="text-sm opacity-60 mb-6">Generated with infinite love by Your Husband</p>
-        <p class="text-xs opacity-40 uppercase tracking-widest">Securely Encrypted in My Heart</p>
-    </div>
-</footer>
-
-<style>
-    .rotate-y-180 { transform: rotateY(180deg); }
-    .perspective { perspective: 1000px; }
-    .style-3d { transform-style: preserve-3d; }
-    .backface-hidden { backface-visibility: hidden; }
-    @keyframes blob {
-        0% { transform: translate(0px, 0px) scale(1); }
-        33% { transform: translate(30px, -50px) scale(1.1); }
-        66% { transform: translate(-20px, 20px) scale(0.9); }
-        100% { transform: translate(0px, 0px) scale(1); }
-    }
-    .animate-blob { animation: blob 7s infinite; }
-    .animation-delay-2000 { animation-delay: 2s; }
-    .animation-delay-4000 { animation-delay: 4s; }
-    .animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-</style>
-
-<script>
-    // --- Navigation Logic ---
-    function scrollToSection(id) {
-        const element = document.getElementById(id);
-        const offset = 80; // Header height
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-        toggleMobileMenu(true); // Close menu if open
-    }
-
-    function toggleMobileMenu(forceClose = false) {
-        const menu = document.getElementById('mobile-menu');
-        if (forceClose) {
-            menu.classList.add('hidden');
-        } else {
-            menu.classList.toggle('hidden');
-        }
-    }
-
-    // --- Chapter Navigation ---
-    function openChapter(chapId) {
-        // Hide all content
-        document.querySelectorAll('.chapter-content').forEach(el => el.classList.add('hidden'));
-        
-        // Show selected content
-        document.getElementById(chapId).classList.remove('hidden');
-        
-        // Reset button styles
-        document.querySelectorAll('.chapter-btn').forEach(btn => {
-            btn.classList.remove('bg-rose-50', 'text-rose-600');
-            btn.classList.add('text-gray-500', 'hover:bg-gray-50');
-        });
-
-        // Highlight active button
-        const activeBtn = document.getElementById('btn-' + chapId);
-        activeBtn.classList.remove('text-gray-500', 'hover:bg-gray-50');
-        activeBtn.classList.add('bg-rose-50', 'text-rose-600');
-    }
-
-    // --- Countdown Logic ---
-    function updateCountdown() {
-        const targetDate = new Date("2025-01-22T00:00:00").getTime();
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            document.getElementById("days-until").innerText = "0";
-        } else {
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById("days-until").innerText = days;
-        }
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // --- Chart.js Implementations ---
-    
-    // 1. Heart Composition (Donut)
-    const ctxHeart = document.getElementById('heartChart').getContext('2d');
-    new Chart(ctxHeart, {
-        type: 'doughnut',
-        data: {
-            labels: ['Rebeca', 'Everything Else'],
-            datasets: [{
-                data: [100, 0],
-                backgroundColor: ['#be123c', '#e5e7eb'],
-                borderWidth: 0,
-                hoverOffset: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom' },
-                tooltip: { 
-                    callbacks: { 
-                        label: function(context) { return ' Rebeca: 100% (No Vacancy)'; } 
-                    } 
-                }
-            }
-        }
-    });
-
-    // 2. Resilience Trajectory (Line)
-    const ctxResilience = document.getElementById('resilienceChart').getContext('2d');
-    new Chart(ctxResilience, {
-        type: 'line',
-        data: {
-            labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
-            datasets: [{
-                label: 'Bond Strength',
-                data: [20, 35, 45, 40, 70, 95], // Dip represents 'Cold Wars', sharp rise represents overcoming them
-                borderColor: '#be123c',
-                backgroundColor: 'rgba(190, 18, 60, 0.1)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { display: false },
-                x: { grid: { display: false } }
-            },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const comments = [
-                                "Meeting You", "Getting Closer", "First 'Cold War'", "Understanding", "Deepening Love", "Unbreakable"
-                            ];
-                            return ` Status: ${comments[context.dataIndex]}`;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#fdfbf7',
+                        'ink': '#2c2929',
+                        'rose-gold': '#b76e79',
+                        'wax-red': '#8a1c1c',
+                    },
+                    fontFamily: {
+                        'handwriting': ['"Great Vibes"', 'cursive'],
+                        'body': ['"Cormorant Garamond"', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'unfold': 'unfold 1.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
                         }
                     }
                 }
             }
         }
-    });
-
-    // 3. Qualities Radar
-    const ctxQualities = document.getElementById('qualitiesChart').getContext('2d');
-    new Chart(ctxQualities, {
-        type: 'radar',
-        data: {
-            labels: ['Cute Stubbornness', 'Caring', 'Beauty', 'Family Love', 'Patience'],
-            datasets: [{
-                label: 'Rebeca',
-                data: [90, 100, 100, 100, 85],
-                fill: true,
-                backgroundColor: 'rgba(217, 119, 6, 0.2)',
-                borderColor: '#d97706',
-                pointBackgroundColor: '#d97706',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: '#d97706'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    angleLines: { display: false },
-                    suggestedMin: 50,
-                    suggestedMax: 100,
-                    ticks: { display: false }
-                }
-            },
-            plugins: { legend: { display: false } }
+    </script>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            overflow-x: hidden;
         }
-    });
-</script>
+        
+        /* Paper Texture */
+        .paper-texture {
+            background-color: #fdfbf7;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .drop-cap {
+            float: left;
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            line-height: 3.5rem;
+            padding-top: 4px;
+            padding-right: 12px;
+            color: #b76e79;
+        }
+
+        /* Envelope Styles */
+        #envelope-container {
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .envelope-hidden {
+            opacity: 0;
+            transform: scale(1.5);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+
+    <!-- ENVELOPE / ENTRY SCREEN -->
+    <div id="envelope-container" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-900 text-white">
+        <div class="relative cursor-pointer group" onclick="openLetter()">
+            <!-- Envelope Body -->
+            <div class="w-80 h-52 bg-rose-100 rounded-lg shadow-2xl relative z-10 flex items-center justify-center transform transition-transform group-hover:scale-105 duration-500">
+                <div class="text-ink font-body text-xl tracking-widest uppercase border-b border-ink/20 pb-2">For Rebeca</div>
+            </div>
+            <!-- Wax Seal -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-16 h-16 bg-wax-red rounded-full flex items-center justify-center shadow-lg border-4 border-red-900/30 group-hover:bg-red-700 transition-colors">
+                <i class="fas fa-heart text-rose-200 text-2xl"></i>
+            </div>
+            <!-- Instructions -->
+            <div class="absolute -bottom-12 left-0 right-0 text-center opacity-60 text-sm font-body tracking-widest animate-bounce">
+                Click to Open
+            </div>
+        </div>
+        <!-- Background Particles -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 text-rose-900/20 text-6xl animate-float"><i class="fas fa-heart"></i></div>
+            <div class="absolute bottom-1/4 right-1/4 text-rose-900/20 text-4xl animate-float" style="animation-delay: 1s;"><i class="fas fa-heart"></i></div>
+        </div>
+    </div>
+
+    <!-- THE LETTER CONTENT -->
+    <main id="letter-content" class="relative opacity-0 transition-opacity duration-[2000ms] py-20 px-4 md:px-8 w-full max-w-4xl">
+        
+        <div class="paper-texture p-8 md:p-16 md:py-24 rounded-sm relative mx-auto max-w-3xl">
+            
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <div class="text-rose-gold text-sm tracking-[0.3em] uppercase mb-4">The 6-Month Anniversary</div>
+                <h1 class="font-handwriting text-6xl md:text-7xl text-ink mb-4">To My Better Half</h1>
+                <div class="w-24 h-[1px] bg-ink/20 mx-auto"></div>
+            </div>
+
+            <!-- Page 1: The Awakening -->
+            <section class="mb-12">
+                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Awakening -</h2>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    <span class="drop-cap">M</span>y Dearest Rebeca, I am sitting here, reading your words over and over again, and I find myself struggling to keep my hands steady. You said that I am your favorite notification, but Rebeca, you are the heartbeat behind every second of my day. Reading what you wrote didn't just bring a smile to my face; it brought a calmness to my soul that I didn’t know I was missing until you came into my life.
+                </p>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    Six months. It has been six months since we stood in front of our parents, our friends, and God, and made a promise that changed the trajectory of our entire existence. When I look back at that day, I realize that saying "Yes" to you wasn't just a decision—it was destiny finally catching up with me. You wrote that you would have regretted saying no, but my love, I don’t even want to imagine a universe where you aren't mine. That version of reality is too dark, too quiet, and too empty for me to comprehend.
+                </p>
+            </section>
+
+            <!-- Divider -->
+            <div class="flex justify-center mb-12 text-rose-gold text-xl opacity-50">❦</div>
+
+            <!-- Page 2: The Reflection -->
+            <section class="mb-12">
+                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Reflection of You -</h2>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    You listed so many things you love about me, but Rebeca, do you have any idea how much I admire <em>you</em>?
+                </p>
+                <div class="pl-6 border-l-2 border-rose-gold/30 my-8 italic text-ink/80 space-y-4">
+                    <p class="font-body text-xl">"You love the way I call you 'Maaa', but you don't see the look in your eyes when you answer me—that softness that melts my anger instantly."</p>
+                    <p class="font-body text-xl">"You love my sleepy voice, but I love the peace I feel knowing that you are the first thought in my mind when I wake up."</p>
+                </div>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    And yes... <strong>Mukku medha gudutha</strong>. You love when I say it, and  I will keep saying it for the rest of our lives. It’s my way of saying that you are cute even when you are stubborn.
+                </p>
+            </section>
+
+            <!-- Divider -->
+            <div class="flex justify-center mb-12 text-rose-gold text-xl opacity-50">❦</div>
+
+            <!-- Page 3: The Obsession -->
+            <section class="mb-12">
+                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Obsession -</h2>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    You called me your obsession, but let me tell you about mine. My obsession is your happiness. My obsession is working hard at the gym so I can be strong enough to carry you—literally and emotionally—for the next sixty years.
+                </p>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    When I hug you, I am trying to shield you from everything bad in this world. When I hold your hand, I am anchoring myself to the only thing that matters. From stranger to my main source of happiness... you own my heart completely.
+                </p>
+            </section>
+
+            <!-- Divider -->
+            <div class="flex justify-center mb-12 text-rose-gold text-xl opacity-50">❦</div>
+
+            <!-- Page 4: The Vow -->
+            <section class="mb-12">
+                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Vow of January -</h2>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6 text-center font-bold text-rose-gold">
+                    January 22, 2025
+                </p>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    That date isn't just a day on the calendar. It is the day my life truly begins. I am already making space for you in every closet, on every shelf, and in every empty moment of my day. I can't wait for grocery shopping with you. I can't wait to taste the food you cook with so much love.
+                </p>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    I promise to be the man you deserve. I will be the irritation you secretly love, the shoulder you cry on, and the hand that pulls you up. I will honor you, respect you, and obsess over you every single day.
+                </p>
+            </section>
+
+            <!-- Page 5: The Forever -->
+            <section class="mb-16">
+                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- Forever -</h2>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
+                    Words will always fall short. How do you explain the feeling of finding your home in a person? We have finished 6 months of this beautiful promise, but this is just the prologue.
+                </p>
+                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-8">
+                    Thank you for choosing me. Thank you for loving my imperfections. I love you not just yesterday, today, and tomorrow. I love you in every lifetime, in every universe, and in every heartbeat.
+                </p>
+                
+                <div class="mt-12 text-right">
+                    <p class="font-handwriting text-4xl md:text-5xl text-ink mb-2">Your Husband</p>
+                    <p class="font-body text-sm tracking-widest uppercase text-ink/60">Happy 6 Months</p>
+                </div>
+            </section>
+
+        </div>
+        
+        <!-- Floating Footer -->
+        <div class="text-center mt-12 text-white/40 font-body text-xs tracking-[0.3em] uppercase pb-8">
+            Written with Infinite Love
+        </div>
+
+    </main>
+
+    <script>
+        function openLetter() {
+            const envelope = document.getElementById('envelope-container');
+            const content = document.getElementById('letter-content');
+            const body = document.body;
+
+            // Animate Envelope Away
+            envelope.classList.add('envelope-hidden');
+            
+            // Change background to soft paper color slowly
+            setTimeout(() => {
+                body.style.transition = "background-color 2s ease";
+                body.style.backgroundColor = "#2c2929"; // Dark background to make paper pop
+                content.classList.remove('opacity-0');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 500);
+        }
+    </script>
+</body>
+</html>
