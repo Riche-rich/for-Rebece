@@ -3,215 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Letter to My Rebeca</title>
+    <title>Journey to Rebeca - Click to Travel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'paper': '#fdfbf7',
-                        'ink': '#2c2929',
-                        'rose-gold': '#b76e79',
-                        'wax-red': '#8a1c1c',
-                    },
-                    fontFamily: {
-                        'handwriting': ['"Great Vibes"', 'cursive'],
-                        'body': ['"Cormorant Garamond"', 'serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'unfold': 'unfold 1.5s ease-out forwards',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Pinyon+Script&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #1a1a1a;
-            overflow-x: hidden;
+        /* --- FONTS --- */
+        .font-title { font-family: 'Cinzel', serif; }
+        .font-script { font-family: 'Pinyon Script', cursive; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
+
+        /* --- UNIVERSE CONTAINER --- */
+        body { 
+            margin: 0; 
+            background: #050505; 
+            color: white; 
+            overflow: hidden; /* No scrolling allowed on body */
+            height: 100vh;
+            perspective: 1000px; /* Depth for 3D transforms */
+        }
+
+        /* --- STAR BACKGROUND --- */
+        #starfield {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at center, #1a0b10 0%, #000000 100%);
+        }
+
+        /* --- LAYER SYSTEM --- */
+        .layer-group {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1); /* Cinematic Ease */
+            transform-style: preserve-3d;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- STATES --- */
+        .layer-group.active {
+            opacity: 1;
+            transform: translateZ(0) scale(1);
+            pointer-events: auto;
+            z-index: 10;
+        }
+        .layer-group.future {
+            opacity: 0;
+            transform: translateZ(-1000px) scale(0.5);
+            z-index: 1;
+        }
+        .layer-group.past {
+            opacity: 0;
+            transform: translateZ(1000px) scale(2);
+            z-index: 20;
+        }
+
+        /* --- COMPONENTS --- */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 2rem 3rem;
+            border-radius: 1rem;
+            max-width: 45rem; /* Slightly wider for text */
+            text-align: center;
+            position: relative;
+            
+            /* Scrollable Content Logic */
+            max-height: 75vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(244, 63, 94, 0.5) transparent;
         }
         
-        /* Paper Texture */
-        .paper-texture {
-            background-color: #fdfbf7;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        }
+        /* Custom Scrollbar for Webkit */
+        .glass-card::-webkit-scrollbar { width: 6px; }
+        .glass-card::-webkit-scrollbar-track { background: transparent; }
+        .glass-card::-webkit-scrollbar-thumb { background-color: rgba(244, 63, 94, 0.5); border-radius: 20px; }
 
-        .drop-cap {
-            float: left;
-            font-family: 'Great Vibes', cursive;
-            font-size: 4.5rem;
-            line-height: 3.5rem;
-            padding-top: 4px;
-            padding-right: 12px;
-            color: #b76e79;
-        }
-
-        /* Envelope Styles */
-        #envelope-container {
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .envelope-hidden {
-            opacity: 0;
-            transform: scale(1.5);
+        .glass-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            border-radius: 1rem;
+            padding: 2px;
+            background: linear-gradient(45deg, transparent, rgba(244, 63, 94, 0.3), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
             pointer-events: none;
+        }
+
+        .nav-btn {
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: pulseBtn 2s infinite;
+            padding-bottom: 1rem; /* padding for scroll safety */
+        }
+        .nav-btn:hover { transform: scale(1.1); }
+
+        @keyframes pulseBtn {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .star {
+            width: 2px; height: 2px; background: white; border-radius: 50%; position: absolute;
+            box-shadow: 0 0 4px white;
+            transition: transform 5s linear; 
+        }
+        
+        /* Typography tweaks for readability */
+        .letter-text {
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center">
+<body>
 
-    <!-- ENVELOPE / ENTRY SCREEN -->
-    <div id="envelope-container" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-900 text-white">
-        <div class="relative cursor-pointer group" onclick="openLetter()">
-            <!-- Envelope Body -->
-            <div class="w-80 h-52 bg-rose-100 rounded-lg shadow-2xl relative z-10 flex items-center justify-center transform transition-transform group-hover:scale-105 duration-500">
-                <div class="text-ink font-body text-xl tracking-widest uppercase border-b border-ink/20 pb-2">For Rebeca</div>
+    <!-- BACKGROUND -->
+    <div id="starfield"></div>
+
+    <!-- === LAYER 0: INTRO === -->
+    <div class="layer-group active" id="layer-0">
+        <div class="text-center">
+            <div class="font-script text-rose-400 text-3xl mb-4"></div>
+            <h1 class="font-title text-6xl md:text-9xl text-white drop-shadow-2xl tracking-widest">REBECA</h1>
+            <div class="h-px w-32 bg-gradient-to-r from-transparent via-rose-500 to-transparent mx-auto mt-8"></div>
+            
+            <div class="nav-btn" onclick="nextLayer()">
+                <p class="font-body text-xs tracking-[0.5em] text-gray-400 mb-2">OPEN LETTER</p>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
             </div>
-            <!-- Wax Seal -->
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-16 h-16 bg-wax-red rounded-full flex items-center justify-center shadow-lg border-4 border-red-900/30 group-hover:bg-red-700 transition-colors">
-                <i class="fas fa-heart text-rose-200 text-2xl"></i>
-            </div>
-            <!-- Instructions -->
-            <div class="absolute -bottom-12 left-0 right-0 text-center opacity-60 text-sm font-body tracking-widest animate-bounce">
-                Click to Open
-            </div>
-        </div>
-        <!-- Background Particles -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <div class="absolute top-1/4 left-1/4 text-rose-900/20 text-6xl animate-float"><i class="fas fa-heart"></i></div>
-            <div class="absolute bottom-1/4 right-1/4 text-rose-900/20 text-4xl animate-float" style="animation-delay: 1s;"><i class="fas fa-heart"></i></div>
         </div>
     </div>
 
-    <!-- THE LETTER CONTENT -->
-    <main id="letter-content" class="relative opacity-0 transition-opacity duration-[2000ms] py-20 px-4 md:px-8 w-full max-w-4xl">
-        
-        <div class="paper-texture p-8 md:p-16 md:py-24 rounded-sm relative mx-auto max-w-3xl">
-            
-            <!-- Header -->
-            <div class="text-center mb-16">
-                <div class="text-rose-gold text-sm tracking-[0.3em] uppercase mb-4">The 6-Month Anniversary</div>
-                <h1 class="font-handwriting text-6xl md:text-7xl text-ink mb-4">To My Better Half</h1>
-                <div class="w-24 h-[1px] bg-ink/20 mx-auto"></div>
+    <!-- === LAYER 1: PAGE 1 === -->
+    <div class="layer-group future" id="layer-1">
+        <div class="glass-card mx-6">
+            <h2 class="font-title text-2xl text-rose-200 mb-4 border-b border-white/10 pb-2"></h2>
+            <div class="font-body text-gray-200 space-y-4 text-sm md:text-base letter-text text-left">
+                <p class="text-center font-script text-2xl text-rose-300 mb-4">My Dearest Wife, My Love,</p>
+                <p>I am sitting here with your letter in my hand, reading your words over and over again. You said that there is so much "unsaid" in you, but reading this, <strong class="text-white">I feel like I have looked directly into your soul.</strong> You have no idea what these words mean to me. You’ve left me speechless, breathless, and honestly, a little teary-eyed.</p>
+                <p>Happy 6 months, my love. It feels like just yesterday we were making those promises in front of our parents and friends, yet at the same time, it feels like I have known you for a lifetime. You are right—this journey hasn’t been a straight line. It has been a rollercoaster of everything. We have had our laughs, our romance, and yes, our "cold wars," our tears, and our misunderstandings.</p>
+                <p>But I want you to know something: I wouldn’t trade a single one of those difficult moments. Not one. Because every tear we wiped away and every misunderstanding we solved just brought us closer. It taught me how to love you better. It taught us how to hold onto each other when things get tough. You said that with the right person, everything seems good and right. Babe, you are that person for me. You are the one who makes the chaotic days peaceful and the quiet days full of life.</p>
+                <p class="italic text-rose-100 border-l-2 border-rose-500 pl-4">"You are the missing piece I didn’t know was gone."</p>
             </div>
 
-            <!-- Page 1: The Awakening -->
-            <section class="mb-12">
-                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Awakening -</h2>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    <span class="drop-cap">M</span>y Dearest Rebeca, I am sitting here, reading your words over and over again, and I find myself struggling to keep my hands steady. You said that I am your favorite notification, but Rebeca, you are the heartbeat behind every second of my day. Reading what you wrote didn't just bring a smile to my face; it brought a calmness to my soul that I didn’t know I was missing until you came into my life.
-                </p>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    Six months. It has been six months since we stood in front of our parents, our friends, and God, and made a promise that changed the trajectory of our entire existence. When I look back at that day, I realize that saying "Yes" to you wasn't just a decision—it was destiny finally catching up with me. You wrote that you would have regretted saying no, but my love, I don’t even want to imagine a universe where you aren't mine. That version of reality is too dark, too quiet, and too empty for me to comprehend.
-                </p>
-            </section>
-
-            <!-- Divider -->
-            <div class="flex justify-center mb-12 text-rose-gold text-xl opacity-50">❦</div>
-
-            <!-- Page 2: The Reflection -->
-            <section class="mb-12">
-                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Reflection of You -</h2>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    You listed so many things you love about me, but Rebeca, do you have any idea how much I admire <em>you</em>?
-                </p>
-                <div class="pl-6 border-l-2 border-rose-gold/30 my-8 italic text-ink/80 space-y-4">
-                    <p class="font-body text-xl">"You love the way I call you 'Maaa', but you don't see the look in your eyes when you answer me—that softness that melts my anger instantly."</p>
-                    <p class="font-body text-xl">"You love my sleepy voice, but I love the peace I feel knowing that you are the first thought in my mind when I wake up."</p>
-                </div>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    And yes... <strong>Mukku medha gudutha</strong>. You love when I say it, and  I will keep saying it for the rest of our lives. It’s my way of saying that you are cute even when you are stubborn.
-                </p>
-            </section>
-
-            <!-- Divider -->
-            <div class="flex justify-center mb-12 text-rose-gold text-xl opacity-50">❦</div>
-
-            <!-- Page 3: The Obsession -->
-            <section class="mb-12">
-                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Obsession -</h2>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    You called me your obsession, but let me tell you about mine. My obsession is your happiness. My obsession is working hard at the gym so I can be strong enough to carry you—literally and emotionally—for the next sixty years.
-                </p>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    When I hug you, I am trying to shield you from everything bad in this world. When I hold your hand, I am anchoring myself to the only thing that matters. From stranger to my main source of happiness... you own my heart completely.
-                </p>
-            </section>
-
-            <!-- Divider -->
-            <div class="flex justify-center mb-12 text-rose-gold text-xl opacity-50">❦</div>
-
-            <!-- Page 4: The Vow -->
-            <section class="mb-12">
-                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- The Vow of January -</h2>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6 text-center font-bold text-rose-gold">
-                    January 22, 2025
-                </p>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    That date isn't just a day on the calendar. It is the day my life truly begins. I am already making space for you in every closet, on every shelf, and in every empty moment of my day. I can't wait for grocery shopping with you. I can't wait to taste the food you cook with so much love.
-                </p>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    I promise to be the man you deserve. I will be the irritation you secretly love, the shoulder you cry on, and the hand that pulls you up. I will honor you, respect you, and obsess over you every single day.
-                </p>
-            </section>
-
-            <!-- Page 5: The Forever -->
-            <section class="mb-16">
-                <h2 class="font-body text-ink/50 text-sm uppercase tracking-widest mb-6 text-center">- Forever -</h2>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-6">
-                    Words will always fall short. How do you explain the feeling of finding your home in a person? We have finished 6 months of this beautiful promise, but this is just the prologue.
-                </p>
-                <p class="font-body text-xl md:text-2xl leading-relaxed text-ink/90 mb-8">
-                    Thank you for choosing me. Thank you for loving my imperfections. I love you not just yesterday, today, and tomorrow. I love you in every lifetime, in every universe, and in every heartbeat.
-                </p>
-                
-                <div class="mt-12 text-right">
-                    <p class="font-handwriting text-4xl md:text-5xl text-ink mb-2">Your Husband</p>
-                    <p class="font-body text-sm tracking-widest uppercase text-ink/60">Happy ∞ Months</p>
-                </div>
-            </section>
-
+            <div class="nav-btn" onclick="nextLayer()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                </svg>
+            </div>
         </div>
+    </div>
+
+    <!-- === LAYER 2: PAGE 2 === -->
+    <div class="layer-group future" id="layer-2">
+        <!-- Decor -->
+        <div class="absolute top-1/4 left-10 text-rose-500/20 text-9xl animate-pulse">♥</div>
         
-        <!-- Floating Footer -->
-        <div class="text-center mt-12 text-white/40 font-body text-xs tracking-[0.3em] uppercase pb-8">
-            Written with Infinite Love
-        </div>
+        <div class="glass-card mx-6">
+            <h2 class="font-title text-2xl text-amber-100 mb-4 border-b border-white/10 pb-2"></h2>
+            <div class="font-body text-gray-200 space-y-4 text-sm md:text-base letter-text text-left">
+                <p class="font-bold text-rose-300">To the woman who loves my "Sleepy Voice",</p>
+                <p>I had to smile when I read your list. You love the way I irritate you? Good, because I have a lifetime of irritation planned for you! I love that we can be playful. I love that I can pull your cheeks and treat you like a kid sometimes, and you still look at me with that love in your eyes.</p>
+                <p>You mentioned “mukku medha gudutha”—and reading that made me laugh out loud. You better be careful, or I’m going to come find you right now just to annoy you until you say it again!</p>
+                <p>But let me tell you what I love:</p>
+                <ul class="list-none space-y-2 pl-4">
+                    <li class="flex items-start"><span class="text-rose-500 mr-2">❤</span> I love the way you look at me when you think I’m not noticing.</li>
+                    <li class="flex items-start"><span class="text-rose-500 mr-2">❤</span> I love the way you blush when I call you "Maaa."</li>
+                    <li class="flex items-start"><span class="text-rose-500 mr-2">❤</span> I love that even when we fight, I can see that you still care about me.</li>
+                    <li class="flex items-start"><span class="text-rose-500 mr-2">❤</span> I love how you have embraced my madness and matched it with your own.</li>
+                </ul>
+                <p class="font-bold text-white">You said I drive you crazy, but babe, you are the one who has made me obsessed. You are my beautiful obsession.</p>
+            </div>
 
-    </main>
+            <div class="nav-btn" onclick="nextLayer()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- === LAYER 3: PAGE 3 === -->
+    <div class="layer-group future" id="layer-3">
+        <div class="glass-card mx-6">
+            <h2 class="font-title text-2xl text-rose-200 mb-4 border-b border-white/10 pb-2"></h2>
+            <div class="font-body text-gray-200 space-y-4 text-sm md:text-base letter-text text-left">
+                <p class="font-bold text-rose-300">My Partner, My Family,</p>
+                <p>One of the things that touched my heart the most in your letter was when you wrote about being an "Amma like in-law" and your excitement to be part of my family.</p>
+                <p>I want you to know how much that means to me. A man’s biggest dream is to see his wife and his parents become one unit, one family. Seeing you accept them, and seeing how you want to cook for us and make a home with us, fills me with a pride I can’t explain. You haven't just married me; you have married into this house, and you have made it brighter just by being in it.</p>
+                <p>You wrote that you are excited to spend the rest of your life in my house and in my arms. I want you to know that my arms will always be your home. Wherever we are, as long as I am holding you, you are safe.</p>
+                <p>I am excited for your cooking (I’m already hungry thinking about it), but more than that, I am excited for the mundane moments. I’m excited to wake up next to you every day, to brush our teeth together, to watch TV, and to just be together. You are not just a guest in my life or my house; you are the queen of it.</p>
+            </div>
+            
+            <div class="nav-btn" onclick="nextLayer()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- === LAYER 4: PAGE 4 === -->
+    <div class="layer-group future" id="layer-4">
+        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <h1 class="font-title text-[20vw] text-white">VOW</h1>
+        </div>
+        <div class="glass-card mx-6 border-l-4 border-rose-500">
+            <h2 class="font-title text-2xl text-white mb-4 border-b border-white/10 pb-2"></h2>
+            <div class="font-body text-gray-200 space-y-4 text-sm md:text-base letter-text text-left">
+                <p class="font-bold text-rose-300">To My "Thick and Thin",</p>
+                <p>You repeated the promises we made six months ago, and now I want to make them to you again, in writing, so you never forget.</p>
+                <div class="bg-black/20 p-4 rounded-lg italic">
+                    <p>I promise to stand by you.</p>
+                    <p>When the days are dark and you feel like crying, I will be the shoulder you soak with your tears.</p>
+                    <p>When you are sick, I will be the one by your bedside.</p>
+                    <p>When you are happy, I will be the one celebrating the loudest.</p>
+                    <p>Through the "cold wars" and the warm hugs, I am not going anywhere.</p>
+                </div>
+                <p>You said you found your man, and you found love. But I found my strength. You are my backbone. When I am weak, I look at you and find a reason to keep going.</p>
+                <p>I know I’m not perfect. I know I annoy you, I know I make mistakes. But my love for you is the most perfect thing about me. I will honor you, respect you, and love you every single second of my life.</p>
+            </div>
+            
+            <div class="nav-btn" onclick="nextLayer()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- === LAYER 5: PAGE 5 (FINALE) === -->
+    <div class="layer-group future" id="layer-5">
+        <div class="glass-card mx-6">
+            <h2 class="font-title text-2xl text-rose-200 mb-4 border-b border-white/10 pb-2"> </h2>
+            <div class="font-body text-gray-200 space-y-4 text-sm md:text-base letter-text text-left">
+                <p class="font-bold text-rose-300">My Forever Main Source of Happiness,</p>
+                <p>As I finish this letter, I feel like there is still so much I haven’t said. Words can’t really capture how you make me feel. You went from being a stranger to being the owner of my heart. It’s scary how much power you have over me, but I trust you with it completely. You are my best friend, my lover, my wife, and my future.</p>
+                <p class="text-center font-bold">So, here is to us.</p>
+                <p class="text-center">Here is to the next six months, the next six years, and the next sixty years.</p>
+                <p class="text-center">Here is to more cheek pulling, more lip pulling, more driving each other crazy, and more love than we know what to do with.</p>
+                <p>Thank you for choosing me. Thank you for saying yes. Thank you for being mine.</p>
+                <div class="text-center font-script text-2xl text-rose-400 mt-4">
+                    <p>I love you yesterday.</p>
+                    <p>I love you today.</p>
+                    <p>I love you tomorrow.</p>
+                    <p>And I will love you forever.</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button onclick="celebrate()" id="final-btn" class="px-8 py-3 bg-rose-600 hover:bg-rose-700 rounded-full text-white font-title tracking-widest transition-all hover:scale-110 shadow-[0_0_30px_rgba(225,29,72,0.6)] cursor-pointer">
+                    Yours, and only yours
+                </button>
+            </div>
+            
+            <!-- Reset Button -->
+            <div class="mt-8 text-xs text-gray-600 cursor-pointer hover:text-white transition-colors" onclick="resetJourney()">
+                Read Again ↻
+            </div>
+        </div>
+    </div>
 
     <script>
-        function openLetter() {
-            const envelope = document.getElementById('envelope-container');
-            const content = document.getElementById('letter-content');
-            const body = document.body;
+        // --- 1. STATE MANAGEMENT ---
+        let currentLayerIndex = 0;
+        const totalLayers = 6; // Increased to 6 layers (0 to 5)
 
-            // Animate Envelope Away
-            envelope.classList.add('envelope-hidden');
-            
-            // Change background to soft paper color slowly
+        function nextLayer() {
+            if (currentLayerIndex >= totalLayers - 1) return;
+
+            // 1. Animate Current Layer OUT (Fly into camera)
+            const currentLayer = document.getElementById(`layer-${currentLayerIndex}`);
+            currentLayer.classList.remove('active');
+            currentLayer.classList.add('past');
+
+            // 2. Increment
+            currentLayerIndex++;
+
+            // 3. Animate Next Layer IN (Fly from distance)
+            const nextLayer = document.getElementById(`layer-${currentLayerIndex}`);
+            nextLayer.classList.remove('future');
+            nextLayer.classList.add('active');
+
+            // 4. Trigger Star Warp Effect
+            warpStars();
+        }
+
+        function resetJourney() {
+            // Reset all classes
+            for (let i = 0; i < totalLayers; i++) {
+                const el = document.getElementById(`layer-${i}`);
+                el.classList.remove('active', 'past', 'future');
+                if (i === 0) el.classList.add('active');
+                else el.classList.add('future');
+            }
+            currentLayerIndex = 0;
+        }
+
+        // --- 2. STARS & WARP EFFECT ---
+        const starfield = document.getElementById('starfield');
+        const stars = [];
+
+        function initStars() {
+            for(let i=0; i<100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 3;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.opacity = Math.random();
+                starfield.appendChild(star);
+                stars.push(star);
+            }
+        }
+
+        function warpStars() {
+            // Create a "warp speed" visual by stretching stars
+            stars.forEach(star => {
+                star.style.transition = 'transform 0.5s ease-in';
+                // Move stars outward from center to simulate forward movement
+                const x = parseFloat(star.style.left) - 50;
+                const y = parseFloat(star.style.top) - 50;
+                star.style.transform = `translate(${x * 5}px, ${y * 5}px) scale(5, 1)`;
+                star.style.opacity = '0.8';
+            });
+
+            // Reset after animation
             setTimeout(() => {
-                body.style.transition = "background-color 2s ease";
-                body.style.backgroundColor = "#2c2929"; // Dark background to make paper pop
-                content.classList.remove('opacity-0');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                stars.forEach(star => {
+                    star.style.transition = 'none';
+                    star.style.transform = 'none';
+                    star.style.opacity = Math.random();
+                    // Reposition randomly for next jump
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                });
             }, 500);
         }
+
+        // --- 3. CELEBRATION ---
+        function celebrate() {
+            const btn = document.getElementById('final-btn');
+            btn.innerHTML = "Message Sent ✨";
+            btn.classList.remove('bg-rose-600');
+            btn.classList.add('bg-green-600');
+            
+            // Simple burst
+            for(let i=0; i<30; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '60%';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.color = '#f43f5e';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = 100;
+                document.body.appendChild(heart);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 200 + Math.random() * 100;
+                const x = Math.cos(angle) * velocity;
+                const y = Math.sin(angle) * velocity;
+
+                heart.animate([
+                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.5)`, opacity: 0 }
+                ], { duration: 1000 }).onfinish = () => heart.remove();
+            }
+        }
+
+        initStars();
     </script>
 </body>
 </html>
-
